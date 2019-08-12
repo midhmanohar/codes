@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 int main(){
     int t;
     scanf("%d",&t);
@@ -11,6 +11,7 @@ int main(){
             prime[i] = true;
         }
         int p;
+        int n = b;
         for(p=2;p*p<=n;p++){
             if(prime[p] == true){
                 for(i=p*p;i<=n;i+=p){
