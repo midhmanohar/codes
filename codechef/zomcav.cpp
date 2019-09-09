@@ -1,30 +1,29 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-int main(){
-    long long t;
-    scanf("%lld",&t);
-    long long n,i;
-    long long c[100005LL];
-    long long h[100005LL];
+#define int int64_t
+#define FAST ios_base::sync_with_stdio(false);cin.tie(NULL);
+void fun(){
+    int n,i;
+    //int c[100005];
+    //int h[100005];
     //int frequency[100005];
-    long long sum[100005LL];
-    while(t--){
-        scanf("%lld",&n);
-        for( i=0LL;i<=100005LL;i++){
-            sum[i] = 0LL;
-        }
-        for(i=0LL;i<n;i++){
-            scanf("%lld",&c[i]);
+    //int sum[100005];
+     cin>>n;
+     vector<int> c(n+1),h(n+1),sum(n+1,0);
+        /*for( i=0;i<=100005;i++){
+            sum[i] = 0;
+        }*/
+        for(i=1;i<=n;i++){
+            cin>>c[i];
         }
         //int sumvar=0;
-        for(i=0LL;i<n;i++){
-            scanf("%lld",&h[i]);
+        for(i=1;i<=n;i++){
+            cin>>h[i];
             //sumvar+=h[i];
         }
         int ini,end;
-        int j;
-        for(i=0LL;i<n;i++){
-            if((i+1)-c[i]<0LL){
+        for(i=1;i<=n;i++){
+            /*if((i+1)-c[i]<0LL){
                 ini=0LL;
             }else{
                 ini=(i+1LL)-c[i];
@@ -33,31 +32,26 @@ int main(){
                 end=n;
             }else{
                 end=(i+1LL)+c[i];
-            }
+            }*/
+            ini = max((int)1,i-c[i]);
+            end = i+1+c[i];
             sum[ini]++;
-            if(end<n){
+            if(end<=n){
                 sum[end]--;
             }
         }
         
         //update
         
-        for(i=1LL;i<n;i++){
-            sum[i]+=sum[i-1LL];
+        for(i=1;i<=n;i++){
+            sum[i]+=sum[i-1];
         }
-
-        sort(sum,sum+n);
-        sort(h,h+n);
-        int flag=1LL;
-        for(i=0LL;i<n;i++){
-            if(sum[i]!=h[i]){
-                flag=0LL;
-                cout<<"NO"<<endl;
-                break;
-            }
-        }
-        if(flag==1LL){
-            cout<<"YES"<<endl;
+        sort(sum.begin(),sum.end());
+        sort(h.begin(),h.end());
+        if(h==sum){
+            cout<<"YES\n";
+        }else{
+            cout<<"NO\n";
         }
 
         /*
@@ -65,7 +59,7 @@ int main(){
         //Bruteforce approach
 
         for(i=0;i<n;i++){
-            if((i+1)-c[i]<0){
+            if((i+11)-c[i]<0){
                 ini=0;
             }else{
                 ini = (i+1)-c[i];
@@ -102,5 +96,13 @@ int main(){
         }else{
             cout<<"YES"<<endl;
         }*/
+}
+signed main(){
+    FAST;
+    int t;
+    cin>>t;
+    while(t--){
+        fun();
     }
+    return 0;
 }
